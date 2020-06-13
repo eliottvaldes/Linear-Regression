@@ -167,8 +167,10 @@
                             </tbody>
                         </table>                      
                         <br>
-                        <!-- BOTON QUE LLEVA A PAGINA DONDE ESTÁ EL CODIGO DE EL PROGRAMA QUE GRAFICA LA REGRESION LINEAL-->            
+                        <!-- BOTON QUE LLEVA A PAGINA DONDE ESTÃ EL CODIGO DE EL PROGRAMA QUE GRAFICA LA REGRESION LINEAL-->            
                             <a href="rl_code.php" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Codigo de Regresion Lineal</a>
+                        <br>
+                        <br>
                         <br>
                        <button type="button" class="close" data-dismiss="modal">Cerrar &times;</button>
                        <br> 
