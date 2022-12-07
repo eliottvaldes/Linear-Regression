@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+    <script src="assets/js/morris.js"></script>
+    <script src='assets/js/morris.min.js'></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/morris.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <script src="assets/js/app.js" defer></script>
+    <title>REGRESIÓN LINEAL</title>
+</head>
+
+<body>
+    <div class="container">
+        <hr>
+        <h1 align="center"><i class="fa fa-money"></i> PESO vs DOLAR <i class="fa fa-money"></i></h1>
+        <hr>
+        <div class="row">
+            <figure class="highcharts-figure">
+                <div id="grl"></div>
+            </figure>
+
+        </div>
+        <br>
+        <div class="help-box">
+            <div class="list-container">
+                <div data-toggle="modal" data-target="#myModalp" class="btn btn-success list-item">
+                    PREDICCIÓN <i class="fa fa-dollar"></i>
+                </div>
+                <div data-toggle="modal" data-target="#myModaln" class="btn btn-success list-item">
+                    NOTAS <i class="fa fa-book"></i>
+                </div>
+                <div data-toggle="modal" data-target="#myModalf" class="btn btn-success list-item">
+                    FlUCTUACIÓN <i class="fa fa-level-down"></i>
+                </div>
+            </div>
+            <br>
+
+            <div class="list-container">
+                <button type="button" class="btn btn-info list-item" onclick='grafica4()'>
+                    Periodo 2020 <i class="fa fa-bar-chart"></i>
+                </button>
+                <button type="button" class="btn btn-danger list-item" onclick='grafica3()'>
+                    Periodo 2010-2020 <i class="fa fa-line-chart"></i>
+                </button>
+                <button type="button" class="btn btn-primary list-item" onclick='grafica2()'>
+                    Periodo 2000-2010 <i class="fa fa-area-chart"></i>
+                </button>
+                <button type="button" class="btn btn-warning list-item" onclick='grafica1()'>
+                    Periodo Global <i class="fa fa-pie-chart"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal window prediction-->
+        <div class="modal fade lug" id="myModalp" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">PREDICCIÓN <i class="fa fa-level-up"></i></h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4>
+                            EL PRECIO DEL PESO EN 5 AÑOS (13/06/2025) sera de: <u><br>$22.85949654</u><br>
+                        </h4>
+                        <br><br>
+
+                        <h4>
+                            (1/5149)= 1 dia <u>Desde 03/01/2000 Hasta 12/06/2020</u> <br>
+                            <br>Ecuación: <code> y = 0.0021x + 7.8731 </code> <br>
+                            <br>R<sup>2</sup> = 0.8203 <br>
+                            <br>Promedio: $13.39 <br>
+                            <br>Color Azul: Valor menor al promedio <br>
+                            <br>Color Verde: Valor mayor o igual al promedio <br>
+                        </h4>
+
+                        <br><br>
+                        <span>
+                            <button type="button" class="close" data-dismiss="modal">Cerrar &times;</button>
+                        </span>
+                        <br>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal window notes-->
+        <div class="modal fade lug" id="myModaln" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-bookmark"></i> NOTAS </h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- TABLA 1 PARA MOSTRAR LOS DATOS OBTENIDOS EN LA REGRESIÓN LINEAL que pertenecen al csv-->
+                        <table class="table table-hover table-bordered">
+                            <caption>Estadisticas globales</caption>
+                            <thead">
+                                <tr>
+                                    <th scope="col"> </th>
+                                    <th scope="col">Periodo</th>
+                                    <th scope="col">Precio por dolar</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Count</th>
+                                        <td> 5149.000000 </td>
+                                        <td> 5149.000000 </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mean</th>
+                                        <td> 2575.000000 </td>
+                                        <td> 13.392137 </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Std</th>
+                                        <td> 1486.532599 </td>
+                                        <td> 3.531484 </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Min</th>
+                                        <td> 1.000000 </td>
+                                        <td> 8.942800 </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">25%</th>
+                                        <td> 1288.000000 </td>
+                                        <td> 10.818000 </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">50%</th>
+                                        <td> 2575.000000 </td>
+                                        <td> 12.604800 </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">75%</th>
+                                        <td> 3862.000000 </td>
+                                        <td> 15.351700 </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Max</th>
+                                        <td> 5149.000000 </td>
+                                        <td> 25.118500 </td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                        <br>
+                        <!-- TABLA PARA MOSTRAR LOS DATOS OBTENIDOS EN LA REGRESIÓN LINEAL-->
+                        <table class="table table-hover table-bordered">
+                            <caption>Datos de regresión lineal</caption>
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Coefficients</th>
+                                    <th scope="col">Mean squared error</th>
+                                    <th scope="col">Variance score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> [0.00215167] </td>
+                                    <td> 2.24 </td>
+                                    <td> 0.82 </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <!-- BOTON QUE LLEVA A PAGINA DONDE ESTÁ EL CODIGO DE EL PROGRAMA QUE GRÁFICA LA REGRESIÓN LINEAL-->
+                        <a href="rl_code.html" class="btn btn-danger btn-lg active" role="button"
+                            aria-pressed="true">Codigo de Regresión Lineal</a>
+                        <br>
+                        <br>
+                        <br>
+                        <button type="button" class="close" data-dismiss="modal">Cerrar &times;</button>
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal window fluctuation-->
+        <div class="modal fade lug" id="myModalf" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal PARA MOSTRAR LAS RAZONES DE FLUCTIACINO-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">FLUCTUACIÓN <i class="fa fa-level-down"></i></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            En Estados Unidos, el Sistema de la Reserva Federal (FED, por sus siglas en ingles), influye
+                            en el precio y la circulación de esta divisa, establece las politicas monetarias y es la
+                            encargada de determinar cuanto dinero debe estar en circulación y los rangos previos de
+                            inflación.
+                            <br>
+                            En Mexico el tipo de cambio peso-delar se determina bajo un regimen cambiario de libre
+                            flotación. Es la Comisión de Cambios la que faculta al Banco de Mexico para llevar a cabo
+                            operaciónes en el mercado cambiario.
+                            <br>
+                            Otro factor que determina el tipo de cambio peso-dolar es la ley de oferta y la demanda, y
+                            es tan simple como el hecho de que cuando la divisa es escasa sube de precio ya sea por su
+                            alta demanda o porque hay poca comparada con otras divisas. En el caso de la depreciación es
+                            porque existe demasiada oferta de la misma o porque es abundante en relación a otras.
+                            <br>
+                            Algunas otras razones de el aumento de el Dolar:
+                            <br>
+                        <ul>
+                            <li>EL PRECIO DEL PETROLEO</li>
+                            <li>CALENDARIO TRIBUTARIO</li>
+                            <li>INVERSIÓN EXTRANGERA Y DE PORTAFOLIO</li>
+                            <li>LA CUENTA CORRIENTE DEL PAIS</li>
+                        </ul>
+                        <br>
+                        Algunos datos historicos que contribuyeron a una mayor fluctuación:
+                        <br>
+                        <ul>
+                            <li>1977 - Por combate a la deuda externa (DESCENSO)</li>
+                            <li>1978 - 1982 Devaluación del peso (AUMENTO)</li>
+                            <li>1978 - 1982 Devaluación del peso (AUMENTO)</li>
+                            <li>1994 - Error de diciembre (AUMENTO)</li>
+                            <li>1990 - Acuerdo comercial TLC (DESCENSO)</li>
+                            <li>2008 - 2009 Gran recesión (AUMENTO )</li>
+                            <li>2014 - 2016 Depreciación del costo del petroleo (AUMENTO)</li>
+                            <li>2020 - Pandemia por COVID-19 (DESCENSO)</li>
+                        </ul>
+                        <br><br>
+                        <span class="text-muted">
+                            Fuentes:
+                            <ul>
+                                <li><a href="https://www.banxico.org.mx/tipcamb/main.do?page=tip&idioma=sp">Banco de
+                                        Mexico</a></li>
+                                <br>
+                                <li><a href="https://www.bbva.com/es/factores-marcan-comportamiento-dolar/">BBVA
+                                        page</a></li>
+                                <br>
+                                <li><a href="https://www.nexos.com.mx/?p=4042">Nexos.com</a></li>
+                                <br>
+                                <li><a
+                                        href="https://www.eumed.net/cursecon/ecolat/mx/2017/devaluaciones-peso-mexico.html#:~:text=De%20esta%20manera%20fue%20como,d%C3%B3lar%20en%20mayo%20de%201913">Eumed.net</a>
+                                </li>
+                                <br>
+                                <li><a href="http://www.mexicomaxico.org/Voto/SobreVal02.htm">Mexicomaxico.org</a></li>
+                                <br>
+                                <li><a href="https://mx.investing.com/currencies/usd-mxn-chart">Investing.com</a></li>
+                            </ul>
+                        </span>
+                        </p>
+                        <br>
+                        <br>
+                        <br>
+                        <span>
+                            <button type="button" class="close" data-dismiss="modal">Cerrar &times;</button>
+                        </span>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+
+        <div class="graphics-container">
+            <div class="row">
+                <hr>
+                <div class="col-12">
+                    <h2>
+                        GRÁFICA <i class="fa fa-bar-chart"></i>
+                        <span class="text-muted"> (Enero 2020 - Junio 2020) </span>
+                    </h2>
+                    <div id="RLP4"></div>
+                </div>
+
+                <hr>
+                <div class="col-12">
+                    <h2>
+                        GRÁFICA <i class="fa fa-line-chart"></i>
+                        <span class="text-muted"> (2010-2020) </span>
+                    </h2>
+                    <div id="RLP3"></div>
+                </div>
+
+                <hr>
+                <div class="col-12">
+                    <h2>GRÁFICA <i class="fa fa-area-chart"></i>
+                        <span class="text-muted"> (2000-2010) </span>
+                    </h2>
+                    <div id="RLP2"></div>
+                </div>
+
+                <hr>
+                <div class="col-12">
+                    <h2>
+                        GRÁFICA <i class="fa fa-pie-chart"></i>
+                        <span class="text-muted"> (2000-2020) </span>
+                    </h2>
+                    <div id="RLP1"></div>
+                </div>
+                <hr class="my-3">
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!--ESTOS SON ARCHIVOS PARA QUE FUNCIÓNEN LAS VENTANAS MODALES-->
+    <!--main js-->
+    <script src="assets/js/jquery-1.12.4.min.js"></script>
+    <!--bootstrap js-->
+    <script src="assets/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
